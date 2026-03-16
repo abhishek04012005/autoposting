@@ -1,0 +1,353 @@
+/* ─── CreatePost — matches Dashboard aesthetic ───────────── */
+/* Fonts & tokens are already declared in Dashboard.css       */
+
+/* ─── Section wrapper ────────────────────────────────────── */
+.create-post-section {
+  animation: fadeUp 0.55s 0.15s ease both;
+}
+
+/* ─── Form card ──────────────────────────────────────────── */
+.create-post-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Field groups ───────────────────────────────────────── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ─── Textarea ───────────────────────────────────────────── */
+.textarea-wrap {
+  position: relative;
+}
+
+.cp-textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 16px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 120px;
+}
+
+.cp-textarea::placeholder { color: var(--muted); }
+
+.cp-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
+}
+
+.char-count {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* ─── File drop zone ─────────────────────────────────────── */
+.file-drop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.file-drop svg { flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+
+.file-drop:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(0,229,255,0.04);
+}
+
+.file-drop:hover svg { opacity: 1; }
+
+/* ─── Platform chips ─────────────────────────────────────── */
+.platform-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.platform-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease,
+              background 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--chip-color, var(--accent));
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.platform-chip:hover {
+  border-color: var(--chip-color, var(--accent));
+  color: var(--text);
+}
+
+.platform-chip.active {
+  border-color: var(--chip-color, var(--accent));
+  background: color-mix(in srgb, var(--chip-color, var(--accent)) 10%, transparent);
+  color: var(--text);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--chip-color, var(--accent)) 18%, transparent);
+}
+
+.platform-chip.active .chip-dot {
+  opacity: 1;
+  transform: scale(1.2);
+  box-shadow: 0 0 8px var(--chip-color, var(--accent));
+}
+
+/* ─── Datetime input ─────────────────────────────────────── */
+.cp-input {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  padding: 13px 16px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color-scheme: dark;
+}
+
+.cp-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
+}
+
+/* ─── Toast feedback ─────────────────────────────────────── */
+.cp-toast {
+  padding: 13px 18px;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: fadeUp 0.3s ease both;
+}
+
+.cp-toast.success {
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.2);
+  color: var(--accent);
+}
+
+.cp-toast.error {
+  background: rgba(255,77,141,0.08);
+  border: 1px solid rgba(255,77,141,0.2);
+  color: var(--accent3);
+}
+
+/* ─── Submit button ──────────────────────────────────────── */
+.cp-submit {
+  position: relative;
+  overflow: hidden;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #080c10;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 0 24px rgba(0,229,255,0.3);
+}
+
+.cp-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cp-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cp-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 32px rgba(0,229,255,0.45);
+}
+
+.cp-submit:hover:not(:disabled)::before { opacity: 1; }
+.cp-submit:active:not(:disabled) { transform: translateY(0); }
+
+/* ─── Spinner animation ──────────────────────────────────── */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Success Modal ─────────────────────────────────────── */
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease both;
+}
+
+.success-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease both;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-content h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.modal-content p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.modal-close {
+  background: var(--accent);
+  color: #080c10;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 99px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,229,255,0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ─── Accessibility ──────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .create-post-form { padding: 20px; gap: 22px; }
+  .cp-submit { align-self: stretch; justify-content: center; }
+  .platform-row { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .create-post-form { padding: 16px; gap: 18px; }
+  .cp-content { font-size: 0.95rem; }
+  .cp-media-label { font-size: 0.85rem; }
+  .platform-chip { padding: 6px 12px; font-size: 0.8rem; }
+  .cp-schedule { font-size: 0.9rem; }
+  .cp-submit { padding: 12px 20px; font-size: 0.9rem; }
+}
+
+@media (max-width: 360px) {
+  .create-post-form { padding: 12px; gap: 16px; }
+  .cp-title { font-size: 1.5rem; }
+  .cp-content { min-height: 80px; font-size: 0.9rem; }
+  .platform-row { gap: 6px; }
+  .platform-chip { padding: 5px 10px; font-size: 0.75rem; }
+  .cp-schedule { font-size: 0.85rem; }
+  .cp-submit { padding: 10px 16px; font-size: 0.85rem; }
+}

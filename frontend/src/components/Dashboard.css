@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg:        #080c10;
+  --surface:   #0f1520;
+  --surface2:  #161e2e;
+  --border:    rgba(255,255,255,0.07);
+  --accent:    #00e5ff;
+  --accent2:   #7b61ff;
+  --accent3:   #ff4d8d;
+  --text:      #e8edf5;
+  --muted:     rgba(232,237,245,0.45);
+  --glow:      0 0 32px rgba(0,229,255,0.18);
+  --radius:    14px;
+  --radius-lg: 22px;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Dashboard Shell ─────────────────────────────────────── */
+.dashboard {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  position: relative;
+  animation: fadeUp 0.6s ease both;
+}
+
+/* Ambient glow blobs */
+.dashboard::before,
+.dashboard::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.dashboard::before {
+  width: 520px; height: 520px;
+  background: rgba(0,229,255,0.06);
+  top: -160px; left: -180px;
+}
+.dashboard::after {
+  width: 420px; height: 420px;
+  background: rgba(123,97,255,0.07);
+  bottom: 0; right: -140px;
+}
+
+.dashboard > * { position: relative; z-index: 1; }
+
+/* ─── Title ───────────────────────────────────────────────── */
+.dashboard-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(115deg, var(--text) 40%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 48px;
+  line-height: 1.1;
+}
+
+.dashboard-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 99px;
+  margin-top: 14px;
+  box-shadow: var(--glow);
+}
+
+/* ─── Section Titles ──────────────────────────────────────── */
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+/* ─── Accounts Section ────────────────────────────────────── */
+.accounts-section {
+  margin-bottom: 40px;
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.account-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeUp 0.5s ease both;
+}
+
+.account-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(0,229,255,0.12), 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.account-icon {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--card-accent, var(--accent));
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px var(--card-accent, var(--accent));
+}
+
+.account-platform {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.account-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--card-accent, var(--accent));
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.15);
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 30%, transparent);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.account-card:hover {
+  border-color: var(--card-accent, var(--accent));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--card-accent, var(--accent)) 20%, transparent),
+              0 8px 24px rgba(0,0,0,0.3);
+}
+
+.empty-sub {
+  font-size: 0.78rem;
+  color: rgba(232,237,245,0.3);
+  margin-top: 4px;
+}
+
+/* ─── Connect Section ─────────────────────────────────────── */
+.connect-section {
+  margin-bottom: 48px;
+}
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.connect-button {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 16px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Platform color accents */
+.connect-button[data-platform="facebook"]  { --btn-accent: #1877f2; }
+.connect-button[data-platform="instagram"] { --btn-accent: #e1306c; }
+.connect-button[data-platform="linkedin"]  { --btn-accent: #0a66c2; }
+.connect-button[data-platform="youtube"]   { --btn-accent: #ff0000; }
+
+.connect-button::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--btn-accent, var(--accent));
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--btn-accent, var(--accent));
+  transition: transform 0.2s ease;
+}
+
+.connect-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--btn-accent, var(--accent)), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.connect-button:hover {
+  border-color: var(--btn-accent, var(--accent));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+
+.connect-button:hover::after { opacity: 0.08; }
+.connect-button:hover::before { transform: scale(1.3); }
+
+.connect-button:active { transform: translateY(0); }
+
+/* ─── Empty State ─────────────────────────────────────────── */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.empty-state svg {
+  opacity: 0.35;
+  margin-bottom: 12px;
+}
+
+/* ─── Animations ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* stagger account cards */
+.account-card:nth-child(1) { animation-delay: 0.05s; }
+.account-card:nth-child(2) { animation-delay: 0.10s; }
+.account-card:nth-child(3) { animation-delay: 0.15s; }
+.account-card:nth-child(4) { animation-delay: 0.20s; }
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .dashboard { padding: 32px 16px 60px; }
+  .connect-grid { grid-template-columns: 1fr 1fr; }
+  .accounts-grid { grid-template-columns: 1fr 1fr; }
+}
